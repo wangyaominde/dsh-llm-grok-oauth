@@ -1,7 +1,7 @@
 {
   "name": "dsh-llm-grok-oauth",
   "description": "Grok (xAI) subscription OAuth provider for DeepSeek Harness: one-click login in Settings → Models, token refresh, live catalog, streaming over cli-chat-proxy.grok.com",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "keywords": [
     "dsh",
     "dsh-plugin",

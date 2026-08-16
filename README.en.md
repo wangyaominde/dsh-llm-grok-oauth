@@ -49,14 +49,15 @@ Restart `dsh web` after installation. Client modules are loaded at process start
 
 ## Usage
 
-1. Open **Settings → Models**.
-2. On **Grok (xAI 订阅)**, click **使用 Grok 账号登录** (Sign in with Grok).
-3. Complete xAI authorization in the browser window (confirm the displayed code).
-4. Return to a session and select a Grok model.
+Open **Settings → Models** and click **Sign in with Grok** on **Grok (xAI 订阅)**. The plugin picks a login method in this order:
 
-Sign-out is on the same row. Credentials are stored locally and refreshed automatically.
+1. If the official Grok CLI is already signed in (`~/.grok/auth.json`), that session is reused and no browser opens.
+2. If there is no CLI session, an xAI device-code page opens. This step requires access to `https://auth.x.ai`.
+3. If the browser flow fails because that host is unreachable, run `grok login` in a terminal, then click Sign in again.
 
-If the official Grok CLI is already signed in (`~/.grok/auth.json`), that session is reused.
+Sign-out is on the same row. Credentials are stored locally. If the official Grok CLI later refreshes the token on this machine, the plugin re-reads that file.
+
+After sign-in, return to a session and select a Grok model.
 
 ## Requirements
 
@@ -64,7 +65,7 @@ If the official Grok CLI is already signed in (`~/.grok/auth.json`), that sessio
 | --- | --- |
 | DeepSeek Harness | `0.1.0-rc.6` or later |
 | Account | SuperGrok or X Premium+ |
-| Official Grok CLI | optional |
+| Official Grok CLI | optional. Reused when already signed in; also a fallback when `auth.x.ai` is unreachable |
 | xAI API key | not required |
 
 ## Relation to the API key field

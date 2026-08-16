@@ -1,7 +1,7 @@
 {
   "name": "dsh-llm-grok-oauth",
   "description": "Grok (xAI) subscription OAuth provider for DeepSeek Harness: one-click login in Settings → Models, token refresh, live catalog, streaming over cli-chat-proxy.grok.com",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "keywords": [
     "dsh",
     "dsh-plugin",
@@ -49,19 +49,31 @@
     "market": {
       "displayName": "Grok OAuth",
       "icon": "https://raw.githubusercontent.com/wangyaominde/dsh-llm-grok-oauth/main/docs/icon.png",
-      "categories": ["llm", "provider", "oauth"],
+      "categories": [
+        "llm",
+        "provider",
+        "oauth"
+      ],
       "screenshots": [
-        "https://raw.githubusercontent.com/wangyaominde/dsh-llm-grok-oauth/main/docs/models-login.jpg"
+        "https://raw.githubusercontent.com/wangyaominde/dsh-llm-grok-oauth/main/docs/en/models-login.jpg"
       ]
     },
     "marketplace": {
-      "profiles": ["web"],
+      "profiles": [
+        "web"
+      ],
       "requiresBuildApproval": false,
       "requiresRestart": true,
       "manualSteps": false
     }
   },
+  "scripts": {
+    "test": "node test/smoke.mjs"
+  },
   "license": "MIT",
+  "dependencies": {
+    "undici": "^7.29.0"
+  },
   "peerDependencies": {
     "@deepseek-ai/cordis": "*",
     "@deepseek-ai/dsh-credentials": "*",
@@ -70,10 +82,20 @@
     "@deepseek-ai/schemastery": "*"
   },
   "peerDependenciesMeta": {
-    "@deepseek-ai/cordis": { "optional": true },
-    "@deepseek-ai/dsh-credentials": { "optional": true },
-    "@deepseek-ai/dsh-llm": { "optional": true },
-    "@deepseek-ai/dsh-settings": { "optional": true },
-    "@deepseek-ai/schemastery": { "optional": true }
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-credentials": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-llm": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-settings": {
+      "optional": true
+    },
+    "@deepseek-ai/schemastery": {
+      "optional": true
+    }
   }
 }

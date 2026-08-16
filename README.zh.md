@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/banner.jpg" alt="dsh-llm-grok-oauth" width="920">
+  <img src="docs/zh/banner.jpg" alt="dsh-llm-grok-oauth" width="920">
 </p>
 
 <h1 align="center">dsh-llm-grok-oauth</h1>
@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="README.en.md">English</a> · 简体中文
+  <a href="README.md">English</a> · 简体中文
 </p>
 
 <p align="center">
@@ -28,7 +28,7 @@ DSH 内置的 Grok 配置仅支持填写 API Key。本插件在同一页面增�
 **设置 → 模型 → Grok (xAI 订阅)**
 
 <p align="center">
-  <img src="docs/models-login.jpg" alt="设置 → 模型 → Grok (xAI 订阅)" width="720">
+  <img src="docs/zh/models-login.jpg" alt="设置 → 模型 → Grok (xAI 订阅)" width="720">
 </p>
 
 ## 安装
@@ -56,11 +56,11 @@ dsh plugin --profile web add github:wangyaominde/dsh-llm-grok-oauth
 1. 点击登录后，在打开的浏览器中完成 xAI 授权。确认代码由 xAI 按本次登录签发，各台电脑、各次点击均不相同。
 2. 返回会话，在输入框模型列表中选择 Grok 模型。若当前会话仍指向 DeepSeek，请新建会话后再发送。
 
-本机进程需要能够访问 `https://auth.x.ai`。若浏览器能打开该地址而登录仍失败，请为启动 `dsh web` 的环境设置 `HTTPS_PROXY`（或在 macOS 系统设置中配置代理）后重试。
+本机进程需要能够访问 `https://auth.x.ai` 和 `https://cli-chat-proxy.grok.com`。登录、模型目录和对话走同一套代理（`HTTPS_PROXY` 或 macOS 系统代理）。若浏览器能打开而登录或发消息仍失败，请为启动 `dsh web` 的环境设置代理后重试。
 
 若本机已通过官方 Grok CLI 登录，将静默复用 `~/.grok/auth.json`，不打开浏览器。未安装 CLI 时不会要求执行 `grok login`。
 
-退出登录位于同一条目，立即清除本插件中的登录状态，不会删除官方 Grok CLI 的登录文件。再次点击登录前，不会自动复用 CLI 会话。若旧版本点击退出后立刻又显示已登录，请更新到 0.2.9 并完全退出后重启 `dsh web`。
+退出登录位于同一条目，立即清除本插件中的登录状态，不会删除官方 Grok CLI 的登录文件。再次点击登录前，不会自动复用 CLI 会话。若旧版本点击退出后立刻又显示已登录，或登录成功但对话报 `TRANSPORT`，请更新到 0.2.10 并完全退出后重启 `dsh web`。
 
 ## 环境要求
 

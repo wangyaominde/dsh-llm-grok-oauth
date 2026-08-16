@@ -1,7 +1,7 @@
 {
   "name": "dsh-llm-grok-oauth",
   "description": "Grok (xAI) subscription OAuth provider for DeepSeek Harness: one-click login in Settings → Models, token refresh, live catalog, streaming over cli-chat-proxy.grok.com",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "keywords": [
     "dsh",
     "dsh-plugin",
@@ -40,7 +40,8 @@
         "@deepseek-ai/dsh-client-ui-slots",
         "@deepseek-ai/dsh-api-remotes"
       ],
-      "platform": "web"
+      "platform": "web",
+      "immediately": true
     },
     "bundle": {
       "patch": "./cordis.patch.yml"

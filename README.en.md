@@ -47,6 +47,8 @@ dsh plugin --profile web add github:wangyaominde/dsh-llm-grok-oauth
 
 Restart `dsh web` after installation. Client modules are loaded at process start; the login button will not appear until restart.
 
+If `pnpm` warns about missing peers such as `@deepseek-ai/cordis`, ignore it. Those packages are provided by the DSH runtime and should not be installed into the plugin directory.
+
 ## Usage
 
 Open **Settings → Models** and click **Sign in with Grok** on **Grok (xAI 订阅)**. Browser sign-in is the default. The official Grok CLI is not required.

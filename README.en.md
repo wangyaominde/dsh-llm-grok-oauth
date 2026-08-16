@@ -60,7 +60,7 @@ The DSH process must be able to reach `https://auth.x.ai`. If a browser can open
 
 If the official Grok CLI is already signed in, that session is reused silently. Machines without the CLI are not asked to run `grok login`.
 
-Sign-out is on the same row. It clears this plugin's session immediately and does not delete the official Grok CLI login file. CLI reuse stays off until Sign in is clicked again.
+Sign-out is on the same row. It clears this plugin's session immediately and does not delete the official Grok CLI login file. CLI reuse stays off until Sign in is clicked again. If an older build signs back in immediately after Sign out, update to 0.2.9 and fully restart `dsh web`.
 
 ## Requirements
 

@@ -60,7 +60,7 @@ dsh plugin --profile web add github:wangyaominde/dsh-llm-grok-oauth
 
 若本机已通过官方 Grok CLI 登录，将静默复用 `~/.grok/auth.json`，不打开浏览器。未安装 CLI 时不会要求执行 `grok login`。
 
-退出登录位于同一条目，立即清除本插件中的登录状态，不会删除官方 Grok CLI 的登录文件。再次点击登录前，不会自动复用 CLI 会话。
+退出登录位于同一条目，立即清除本插件中的登录状态，不会删除官方 Grok CLI 的登录文件。再次点击登录前，不会自动复用 CLI 会话。若旧版本点击退出后立刻又显示已登录，请更新到 0.2.9 并完全退出后重启 `dsh web`。
 
 ## 环境要求
 

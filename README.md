@@ -5,8 +5,8 @@
 <h1 align="center">dsh-llm-grok-oauth</h1>
 
 <p align="center">
-  在模型页 <strong>使用 Grok 账号登录</strong>。<br>
-  把 SuperGrok / X Premium+ 接到 <a href="https://github.com/deepseek-ai/deepseek-harness">DeepSeek Harness</a>，不需要 xAI API Key。
+  你已经有 Grok 会员，就能在 <a href="https://github.com/deepseek-ai/deepseek-harness">DeepSeek Harness</a> 里用 Grok。<br>
+  不用再去 xAI 买 API Key。
 </p>
 
 <p align="center">
@@ -23,106 +23,65 @@
 
 ---
 
-DeepSeek Harness 本来就会填 API Key。这个插件只补它没有的能力：在 **设置 → 模型** 的 Grok 卡片上 **一键登录订阅**。
+DSH 自带的 Grok 只能填 API Key。这个插件多做一件事：让你用 **Grok 网页账号** 登录。
+
+会员指 SuperGrok，或者 X Premium+。有其中一个就行。
 
 <p align="center">
-  <img src="docs/models-login.jpg" alt="设置 → 模型 → Grok 登录卡片" width="720">
+  <img src="docs/models-login.jpg" alt="设置里的 Grok 登录按钮" width="720">
 </p>
 <p align="center">
-  <sub>设置 → 模型 → <b>Grok (xAI 订阅)</b> · 登录就做在这一行</sub>
+  <sub>登录按钮在：设置 → 模型 → Grok (xAI 订阅)</sub>
 </p>
 
-打开这张卡片，点 **使用 Grok 账号登录**，在 xAI 授权页确认，回到会话选 Grok 4.6 / 4.5 即可。有 SuperGrok 或 X Premium+ 就行，不另开设置页，也不走插件页。
+## 装
 
-## 能做什么
-
-<table>
-  <tr>
-    <td width="50%">
-      <h3>🔐 一键登录</h3>
-      嵌在 Grok 提供方那一行。设备码流程（RFC 8628）；宿主打开浏览器，卡片上显示确认代码。
-    </td>
-    <td width="50%">
-      <h3>🎫 走订阅，不走账单</h3>
-      与官方 Grok CLI 同一套第一方 OAuth 客户端和聊天代理。用 SuperGrok / X Premium+，不用 API 余额。
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <h3>📡 实时目录</h3>
-      登录后，账号可用的模型出现在选择器里。目录里标成隐藏的默认不展示。
-    </td>
-    <td>
-      <h3>🌊 对接 dsh 流协议</h3>
-      Responses / chat-completions 译成 <code>StreamChunk</code>，含推理、工具和用量。
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <h3>💾 令牌留在本机</h3>
-      写入 harness 凭据存储（<code>GROK_OAUTH_TOKENS</code>），界面不回显。
-    </td>
-    <td>
-      <h3>♻️ 复用 Grok CLI</h3>
-      若 <code>~/.grok/auth.json</code> 已用同一客户端登录，会直接复用那份会话。
-    </td>
-  </tr>
-</table>
-
-## 安装
+先装好 DSH，然后在终端执行：
 
 ```sh
 dsh plugin --profile web add github:wangyaominde/dsh-llm-grok-oauth
 ```
 
-重启 `dsh web`。没有第二步。
+装完后把 `dsh web` **关掉再开一次**。不重启的话，设置页还看不到登录按钮。
 
-| 需要 | |
+## 用
+
+1. 打开 DSH，进 **设置 → 模型**。
+2. 找到 **Grok (xAI 订阅)**，点 **使用 Grok 账号登录**。
+3. 浏览器会弹出 xAI 的确认页。页面上有一串代码，对上之后点确认。
+4. 回到 DSH 开一个对话，模型列表里选 Grok，就可以聊天了。
+
+退出登录也在同一块地方。登录过期后会自己续上，不用每次重新点。
+
+电脑上如果已经登录过官方 Grok 命令行，点登录时会直接用那份，不必再授权一次。
+
+## 你要准备什么
+
+| | |
 | --- | --- |
-| DeepSeek Harness `0.1.0-rc.6` 及以上 | 必须 |
-| SuperGrok 或 X Premium+ | 必须 |
-| 官方 Grok CLI | 可选 |
-| xAI API Key | 不用 |
+| DSH `0.1.0-rc.6` 或更新 | 要 |
+| SuperGrok 或 X Premium+ | 要 |
+| 官方 Grok 命令行 | 可有可无 |
+| xAI 的 API Key | 不要 |
 
-## 怎么用
+## 和填 API Key 有什么不一样
 
-1. 打开 **设置 → 模型**。
-2. 在 **Grok (xAI 订阅)** 上点 **使用 Grok 账号登录**。
-3. 在弹出的浏览器里确认代码。
-4. 回到会话，选择 **Grok (xAI 订阅)**，直接聊。
-
-退出登录也在同一张卡片。令牌过期会自动刷新。
-
-## 怎么走
-
-```mermaid
-flowchart LR
-  A["设置 → 模型"] --> B["使用 Grok 账号登录"]
-  B --> C["auth.x.ai"]
-  C --> D["$DSH_HOME 凭据"]
-  D --> E["cli-chat-proxy.grok.com"]
-  E --> F["Grok 4.6 / 4.5"]
-```
-
-这个插件 **不请求** `api.x.ai`，也 **不写入** `GROK_API_KEY`。你已经在 dsh 里配过的 API Key 线路不会被改掉。
-
-## 和填 API Key 的区别
-
-| | 这个插件 | 粘贴 xAI Key |
+| | 这个插件 | DSH 自带的填 Key |
 | --- | --- | --- |
-| 在哪配置 | 设置 → 模型 | 设置 → 模型（dsh 自带） |
-| 用什么额度 | Grok 订阅 | API 余额 |
-| 额外页面 | 没有 | 没有 |
-| 本仓库补的 | OAuth 登录 + 订阅线路 | dsh 已经有了 |
+| 你怎么登录 | 点按钮，用 Grok 账号 | 把一串 Key 粘进去 |
+| 钱从哪扣 | 你的 Grok 会员 | xAI 控制台里的 API 余额 |
+| 要不要新开一页 | 不用 | 不用 |
 
-## 卸载
+两套可以同时存在。这个插件不会改掉你已经填过的 API Key。
+
+## 卸
 
 ```sh
 dsh plugin --profile web remove dsh-llm-grok-oauth
 ```
 
-然后重启 `dsh web`。
+再把 `dsh web` 关掉开一次。
 
 ## 许可
 
-[MIT](LICENSE) © wangyaominde
+[MIT](LICENSE)

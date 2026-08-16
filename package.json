@@ -44,6 +44,20 @@
     },
     "bundle": {
       "patch": "./cordis.patch.yml"
+    },
+    "market": {
+      "displayName": "Grok OAuth",
+      "icon": "https://raw.githubusercontent.com/wangyaominde/dsh-llm-grok-oauth/main/docs/icon.png",
+      "categories": ["llm", "provider", "oauth"],
+      "screenshots": [
+        "https://raw.githubusercontent.com/wangyaominde/dsh-llm-grok-oauth/main/docs/models-login.jpg"
+      ]
+    },
+    "marketplace": {
+      "profiles": ["web"],
+      "requiresBuildApproval": false,
+      "requiresRestart": true,
+      "manualSteps": false
     }
   },
   "license": "MIT",

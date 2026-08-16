@@ -5,8 +5,8 @@
 <h1 align="center">dsh-llm-grok-oauth</h1>
 
 <p align="center">
-  If you already pay for Grok, you can use it in <a href="https://github.com/deepseek-ai/deepseek-harness">DeepSeek Harness</a>.<br>
-  You do not need an xAI API key.
+  DeepSeek Harness plugin: sign in with a Grok account under Settings → Models<br>
+  and run models on a SuperGrok / X Premium+ subscription. No xAI API key.
 </p>
 
 <p align="center">
@@ -23,64 +23,67 @@
 
 ---
 
-DSH’s built-in Grok setup only accepts an API key. This plugin adds one extra thing: **log in with your Grok website account**.
+The built-in Grok provider in DSH accepts an API key only. This plugin adds account login on the same page. The control is at:
 
-That means SuperGrok, or X Premium+. Either one is enough.
+**Settings → Models → Grok (xAI 订阅)**
 
 <p align="center">
-  <img src="docs/models-login.jpg" alt="Grok sign-in button in Settings" width="720">
-</p>
-<p align="center">
-  <sub>The button is at: Settings → Models → Grok (xAI 订阅)</sub>
+  <img src="docs/models-login.jpg" alt="Settings → Models → Grok (xAI 订阅)" width="720">
 </p>
 
 ## Install
 
-Install DSH first, then run:
+Requires [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) and [pnpm](https://pnpm.io). If `dsh` is not on `PATH`, use `npx`:
+
+```sh
+npx @deepseek-ai/dsh plugin --profile web add github:wangyaominde/dsh-llm-grok-oauth
+```
+
+If the `dsh` command is already installed:
 
 ```sh
 dsh plugin --profile web add github:wangyaominde/dsh-llm-grok-oauth
 ```
 
-Then **quit and start `dsh web` again**. If you skip the restart, the sign-in button will not show up.
+Restart `dsh web` after installation. Client modules are loaded at process start; the login button will not appear until restart.
 
-## Use
+## Usage
 
-1. Open DSH. Go to **Settings → Models**.
-2. Find **Grok (xAI 订阅)** and click **使用 Grok 账号登录** (Sign in with Grok).
-3. A browser window opens. Match the code on the page and confirm.
-4. Go back to a chat in DSH, pick a Grok model, and talk.
+1. Open **Settings → Models**.
+2. On **Grok (xAI 订阅)**, click **使用 Grok 账号登录** (Sign in with Grok).
+3. Complete xAI authorization in the browser window (confirm the displayed code).
+4. Return to a session and select a Grok model.
 
-Sign out is on the same card. After you are signed in, DSH keeps you signed in; you do not click this every time.
+Sign-out is on the same row. Credentials are stored locally and refreshed automatically.
 
-If this computer already signed in with the official Grok command line, clicking the button reuses that login.
+If the official Grok CLI is already signed in (`~/.grok/auth.json`), that session is reused.
 
-## What you need
+## Requirements
 
-| | |
+| Item | Requirement |
 | --- | --- |
-| DSH `0.1.0-rc.6` or newer | yes |
-| SuperGrok or X Premium+ | yes |
+| DeepSeek Harness | `0.1.0-rc.6` or later |
+| Account | SuperGrok or X Premium+ |
 | Official Grok CLI | optional |
-| An xAI API key | no |
+| xAI API key | not required |
 
-## vs pasting an API key
+## Relation to the API key field
 
-| | This plugin | DSH’s built-in key field |
+| | This plugin | Built-in Grok config |
 | --- | --- | --- |
-| How you sign in | Click a button, use your Grok account | Paste a key |
-| What you pay with | Your Grok subscription | API credit in the xAI console |
-| Extra page | no | no |
+| Location | Settings → Models | Settings → Models |
+| Authentication | Grok account login | API key |
+| Billing | SuperGrok / X Premium+ | xAI API credit |
 
-You can keep both. This plugin does not overwrite a key you already saved.
+Both may be configured at the same time. This plugin does not write or overwrite a saved API key.
 
 ## Uninstall
 
 ```sh
-dsh plugin --profile web remove dsh-llm-grok-oauth
+npx @deepseek-ai/dsh plugin --profile web remove dsh-llm-grok-oauth
 ```
 
-Then quit and start `dsh web` again.
+Restart `dsh web` after uninstall.
 
 ## License
 

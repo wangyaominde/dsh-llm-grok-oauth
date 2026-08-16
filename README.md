@@ -5,8 +5,8 @@
 <h1 align="center">dsh-llm-grok-oauth</h1>
 
 <p align="center">
-  你已经有 Grok 会员，就能在 <a href="https://github.com/deepseek-ai/deepseek-harness">DeepSeek Harness</a> 里用 Grok。<br>
-  不用再去 xAI 买 API Key。
+  DeepSeek Harness 插件：在「设置 → 模型」中通过 Grok 账号登录，<br>
+  使用 SuperGrok / X Premium+ 订阅调用模型，无需 xAI API Key。
 </p>
 
 <p align="center">
@@ -23,64 +23,67 @@
 
 ---
 
-DSH 自带的 Grok 只能填 API Key。这个插件多做一件事：让你用 **Grok 网页账号** 登录。
+DSH 内置的 Grok 配置仅支持填写 API Key。本插件在同一页面增加账号登录，登录入口位于：
 
-会员指 SuperGrok，或者 X Premium+。有其中一个就行。
+**设置 → 模型 → Grok (xAI 订阅)**
 
 <p align="center">
-  <img src="docs/models-login.jpg" alt="设置里的 Grok 登录按钮" width="720">
-</p>
-<p align="center">
-  <sub>登录按钮在：设置 → 模型 → Grok (xAI 订阅)</sub>
+  <img src="docs/models-login.jpg" alt="设置 → 模型 → Grok (xAI 订阅)" width="720">
 </p>
 
-## 装
+## 安装
 
-先装好 DSH，然后在终端执行：
+本机需已安装 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 与 [pnpm](https://pnpm.io)。未将 `dsh` 加入 PATH 时，使用 `npx`：
+
+```sh
+npx @deepseek-ai/dsh plugin --profile web add github:wangyaominde/dsh-llm-grok-oauth
+```
+
+已安装 `dsh` 命令时：
 
 ```sh
 dsh plugin --profile web add github:wangyaominde/dsh-llm-grok-oauth
 ```
 
-装完后把 `dsh web` **关掉再开一次**。不重启的话，设置页还看不到登录按钮。
+安装完成后须重启 `dsh web`。客户端模块仅在进程启动时加载，未重启则设置页不会出现登录按钮。
 
-## 用
+## 使用
 
-1. 打开 DSH，进 **设置 → 模型**。
-2. 找到 **Grok (xAI 订阅)**，点 **使用 Grok 账号登录**。
-3. 浏览器会弹出 xAI 的确认页。页面上有一串代码，对上之后点确认。
-4. 回到 DSH 开一个对话，模型列表里选 Grok，就可以聊天了。
+1. 打开 **设置 → 模型**。
+2. 在 **Grok (xAI 订阅)** 中点击 **使用 Grok 账号登录**。
+3. 在打开的浏览器窗口中完成 xAI 授权（核对页面上的确认代码后确认）。
+4. 返回会话，在模型列表中选择 Grok 模型。
 
-退出登录也在同一块地方。登录过期后会自己续上，不用每次重新点。
+退出登录位于同一条目。登录状态保存在本机；过期后自动刷新，无需重复授权。
 
-电脑上如果已经登录过官方 Grok 命令行，点登录时会直接用那份，不必再授权一次。
+若本机已通过官方 Grok CLI 登录（存在 `~/.grok/auth.json`），将复用该会话。
 
-## 你要准备什么
+## 环境要求
 
-| | |
+| 项目 | 要求 |
 | --- | --- |
-| DSH `0.1.0-rc.6` 或更新 | 要 |
-| SuperGrok 或 X Premium+ | 要 |
-| 官方 Grok 命令行 | 可有可无 |
-| xAI 的 API Key | 不要 |
+| DeepSeek Harness | `0.1.0-rc.6` 及以上 |
+| 账号 | SuperGrok 或 X Premium+ |
+| 官方 Grok CLI | 可选 |
+| xAI API Key | 不需要 |
 
-## 和填 API Key 有什么不一样
+## 与 API Key 配置的关系
 
-| | 这个插件 | DSH 自带的填 Key |
+| | 本插件 | DSH 内置 Grok 配置 |
 | --- | --- | --- |
-| 你怎么登录 | 点按钮，用 Grok 账号 | 把一串 Key 粘进去 |
-| 钱从哪扣 | 你的 Grok 会员 | xAI 控制台里的 API 余额 |
-| 要不要新开一页 | 不用 | 不用 |
+| 入口 | 设置 → 模型 | 设置 → 模型 |
+| 认证方式 | Grok 账号登录 | 填写 API Key |
+| 计费 | SuperGrok / X Premium+ 订阅 | xAI API 余额 |
 
-两套可以同时存在。这个插件不会改掉你已经填过的 API Key。
+两者可同时存在。本插件不写入、不覆盖已保存的 API Key。
 
-## 卸
+## 卸载
 
 ```sh
-dsh plugin --profile web remove dsh-llm-grok-oauth
+npx @deepseek-ai/dsh plugin --profile web remove dsh-llm-grok-oauth
 ```
 
-再把 `dsh web` 关掉开一次。
+卸载后须重启 `dsh web`。
 
 ## 许可
 

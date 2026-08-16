@@ -1,0 +1,57 @@
+{
+  "name": "dsh-llm-grok-oauth",
+  "description": "Grok (xAI) subscription OAuth provider for DeepSeek Harness: one-click login in Settings → Models, token refresh, live catalog, streaming over cli-chat-proxy.grok.com",
+  "version": "0.2.1",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "grok",
+    "xai",
+    "oauth"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangyaominde/dsh-llm-grok-oauth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wangyaominde/dsh-llm-grok-oauth/issues"
+  },
+  "homepage": "https://github.com/wangyaominde/dsh-llm-grok-oauth#readme",
+  "author": "wangyaominde",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/**/*.js",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "platform": "web"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/dsh-credentials": "*",
+    "@deepseek-ai/dsh-llm": "*",
+    "@deepseek-ai/dsh-settings": "*",
+    "@deepseek-ai/schemastery": "*"
+  }
+}

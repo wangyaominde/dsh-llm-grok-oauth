@@ -51,14 +51,14 @@ Restart `dsh web` after installation. Client modules are loaded at process start
 
 Open **Settings → Models** and click **Sign in with Grok** on **Grok (xAI 订阅)**. Browser sign-in is the default. The official Grok CLI is not required.
 
-1. Complete xAI authorization in the browser window (confirm the displayed code).
+1. Complete xAI authorization in the browser. The confirmation code is issued by xAI for that attempt; it is not shared across machines or clicks.
 2. Return to a session and select a Grok model. If the current session still targets DeepSeek, start a new session before sending.
 
 The DSH process must be able to reach `https://auth.x.ai`. If a browser can open that host but sign-in still fails, set `HTTPS_PROXY` in the environment that launches `dsh web` (or configure the macOS system proxy) and retry.
 
 If the official Grok CLI is already signed in, that session is reused silently. Machines without the CLI are not asked to run `grok login`.
 
-Sign-out is on the same row. Credentials are stored locally.
+Sign-out is on the same row. It clears this plugin's session immediately and does not delete the official Grok CLI login file. CLI reuse stays off until Sign in is clicked again.
 
 ## Requirements
 

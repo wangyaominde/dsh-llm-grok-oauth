@@ -51,14 +51,14 @@ dsh plugin --profile web add github:wangyaominde/dsh-llm-grok-oauth
 
 打开 **设置 → 模型**，在 **Grok (xAI 订阅)** 中点击 **使用 Grok 账号登录**。默认走网页授权，不要求安装官方 Grok CLI。
 
-1. 点击登录后，在打开的浏览器中完成 xAI 授权（核对页面上的确认代码）。
+1. 点击登录后，在打开的浏览器中完成 xAI 授权。确认代码由 xAI 按本次登录签发，各台电脑、各次点击均不相同。
 2. 返回会话，在输入框模型列表中选择 Grok 模型。若当前会话仍指向 DeepSeek，请新建会话后再发送。
 
 本机进程需要能够访问 `https://auth.x.ai`。若浏览器能打开该地址而登录仍失败，请为启动 `dsh web` 的环境设置 `HTTPS_PROXY`（或在 macOS 系统设置中配置代理）后重试。
 
 若本机已通过官方 Grok CLI 登录，将静默复用 `~/.grok/auth.json`，不打开浏览器。未安装 CLI 时不会要求执行 `grok login`。
 
-退出登录位于同一条目。登录状态保存在本机。
+退出登录位于同一条目，立即清除本插件中的登录状态，不会删除官方 Grok CLI 的登录文件。再次点击登录前，不会自动复用 CLI 会话。
 
 ## 环境要求
 

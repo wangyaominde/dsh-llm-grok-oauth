@@ -49,15 +49,16 @@ Restart `dsh web` after installation. Client modules are loaded at process start
 
 ## Usage
 
-Open **Settings → Models** and click **Sign in with Grok** on **Grok (xAI 订阅)**. The plugin picks a login method in this order:
+Open **Settings → Models** and click **Sign in with Grok** on **Grok (xAI 订阅)**. Browser sign-in is the default. The official Grok CLI is not required.
 
-1. If the official Grok CLI is already signed in (`~/.grok/auth.json`), that session is reused and no browser opens.
-2. If there is no CLI session, an xAI device-code page opens. This step requires access to `https://auth.x.ai`.
-3. If the browser flow fails because that host is unreachable, run `grok login` in a terminal, then click Sign in again.
+1. Complete xAI authorization in the browser window (confirm the displayed code).
+2. Return to a session and select a Grok model. If the current session still targets DeepSeek, start a new session before sending.
 
-Sign-out is on the same row. Credentials are stored locally. If the official Grok CLI later refreshes the token on this machine, the plugin re-reads that file.
+The DSH process must be able to reach `https://auth.x.ai`. If a browser can open that host but sign-in still fails, set `HTTPS_PROXY` in the environment that launches `dsh web` (or configure the macOS system proxy) and retry.
 
-After sign-in, return to a session and select a Grok model.
+If the official Grok CLI is already signed in, that session is reused silently. Machines without the CLI are not asked to run `grok login`.
+
+Sign-out is on the same row. Credentials are stored locally.
 
 ## Requirements
 
@@ -65,7 +66,7 @@ After sign-in, return to a session and select a Grok model.
 | --- | --- |
 | DeepSeek Harness | `0.1.0-rc.6` or later |
 | Account | SuperGrok or X Premium+ |
-| Official Grok CLI | optional. Reused when already signed in; also a fallback when `auth.x.ai` is unreachable |
+| Official Grok CLI | not required. Reused only when already signed in |
 | xAI API key | not required |
 
 ## Relation to the API key field

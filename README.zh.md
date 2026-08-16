@@ -49,15 +49,16 @@ dsh plugin --profile web add github:wangyaominde/dsh-llm-grok-oauth
 
 ## 使用
 
-打开 **设置 → 模型**，在 **Grok (xAI 订阅)** 中点击 **使用 Grok 账号登录**。插件按下列顺序自动选择登录方式：
+打开 **设置 → 模型**，在 **Grok (xAI 订阅)** 中点击 **使用 Grok 账号登录**。默认走网页授权，不要求安装官方 Grok CLI。
 
-1. 若本机已有官方 Grok CLI 登录（`~/.grok/auth.json`），直接复用该会话，不打开浏览器。
-2. 若无 CLI 会话，则打开 xAI 授权页（设备码）。此步骤需要本机能够访问 `https://auth.x.ai`。
-3. 若网页授权因网络失败，可先在终端执行 `grok login`，再回到本页点击登录。
+1. 点击登录后，在打开的浏览器中完成 xAI 授权（核对页面上的确认代码）。
+2. 返回会话，在输入框模型列表中选择 Grok 模型。若当前会话仍指向 DeepSeek，请新建会话后再发送。
 
-退出登录位于同一条目。登录状态保存在本机。若官方 Grok CLI 随后在本机刷新了令牌，插件会重新读取该文件。
+本机进程需要能够访问 `https://auth.x.ai`。若浏览器能打开该地址而登录仍失败，请为启动 `dsh web` 的环境设置 `HTTPS_PROXY`（或在 macOS 系统设置中配置代理）后重试。
 
-登录完成后，返回会话并在模型列表中选择 Grok 模型。
+若本机已通过官方 Grok CLI 登录，将静默复用 `~/.grok/auth.json`，不打开浏览器。未安装 CLI 时不会要求执行 `grok login`。
+
+退出登录位于同一条目。登录状态保存在本机。
 
 ## 环境要求
 
@@ -65,7 +66,7 @@ dsh plugin --profile web add github:wangyaominde/dsh-llm-grok-oauth
 | --- | --- |
 | DeepSeek Harness | `0.1.0-rc.6` 及以上 |
 | 账号 | SuperGrok 或 X Premium+ |
-| 官方 Grok CLI | 可选。已登录时优先复用；无法访问 `auth.x.ai` 时可作为备选登录方式 |
+| 官方 Grok CLI | 不是必需。仅在本机已登录时复用该会话 |
 | xAI API Key | 不需要 |
 
 ## 与 API Key 配置的关系
